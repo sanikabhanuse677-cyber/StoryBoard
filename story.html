@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StoryBoard — Now Playing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="story-body">
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-mark">📽</div>
+      <span class="nav-logo-text">StoryBoard</span>
+    </a>
+    <div class="nav-actions">
+      <a href="index.html" class="nav-btn nav-btn-ghost">← Library</a>
+    </div>
+  </nav>
+
+  <!-- STORY LAYOUT: LEFT TEXT + RIGHT CHARACTER -->
+  <main class="story-page">
+
+    <!-- ── LEFT: NARRATIVE PANEL ── -->
+    <section class="narrative-panel">
+
+      <div class="story-meta-bar">
+        <a href="index.html" class="meta-back-btn" title="Back">←</a>
+        <div class="meta-info">
+          <div class="meta-genre" id="meta-genre">Genre</div>
+          <div class="meta-title" id="meta-title">Loading…</div>
+        </div>
+        <div class="meta-progress-badge" id="progress-badge">0 / 0</div>
+      </div>
+
+      <!-- All story lines rendered here -->
+      <div class="lines-wrapper" id="lines-wrapper"></div>
+
+      <!-- Shows after last line -->
+      <div class="end-card" id="end-card">
+        <div class="end-card-icon">✨</div>
+        <div class="end-card-title">The End</div>
+        <div class="end-card-sub">Your story has been told. Every word, a world.</div>
+        <a href="index.html" class="end-card-btn">← Back to Library</a>
+      </div>
+
+    </section>
+
+    <!-- ── RIGHT: CHARACTER + CONTROLS ── -->
+    <aside class="character-panel">
+
+      <!-- Ambient blobs -->
+      <div class="amb-blob amb-blob-1" id="amb1"></div>
+      <div class="amb-blob amb-blob-2" id="amb2"></div>
+
+      <!-- Avatar -->
+      <div class="avatar-wrap">
+        <div class="avatar-ring ar1"></div>
+        <div class="avatar-ring ar2"></div>
+        <div class="avatar-face" id="avatar-face">
+          <span id="avatar-emoji">🎭</span>
+        </div>
+        <div class="wave-bars" id="wave-bars">
+          <span class="wb"></span>
+          <span class="wb"></span>
+          <span class="wb"></span>
+          <span class="wb"></span>
+          <span class="wb"></span>
+        </div>
+      </div>
+
+      <div class="narrator-label-wrap">
+        <div class="narrator-label">Narrator</div>
+        <div class="narrator-name" id="narrator-name">The Storyteller</div>
+      </div>
+
+      <!-- Controls Box -->
+      <div class="ctrl-box">
+
+        <!-- Voice Gender -->
+        <div class="ctrl-section">
+          <div class="ctrl-section-label">Voice</div>
+          <div class="ctrl-row">
+            <button class="vbtn active" id="btn-male"   onclick="App.setVoice('male')">♂ Male</button>
+            <button class="vbtn"        id="btn-female" onclick="App.setVoice('female')">♀ Female</button>
+          </div>
+        </div>
+
+        <!-- Baby Voice -->
+        <div class="ctrl-section">
+          <button class="baby-btn" id="btn-baby" onclick="App.toggleBaby()">
+            🍼 Baby Voice &nbsp;<span class="baby-tag" id="baby-tag">OFF</span>
+          </button>
+        </div>
+
+        <!-- Playback -->
+        <div class="ctrl-section">
+          <div class="ctrl-section-label">Playback</div>
+          <div class="ctrl-row">
+            <button class="icon-btn" onclick="App.restart()" title="Restart">↩</button>
+            <button class="play-btn" id="play-btn" onclick="App.togglePlay()">
+              <span id="play-icon">▶</span>
+              <span id="play-label">Play</span>
+            </button>
+            <button class="icon-btn" onclick="App.skip(1)" title="Next Line">⏭</button>
+          </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="ctrl-section">
+          <div class="prog-track">
+            <div class="prog-fill" id="prog-fill"></div>
+          </div>
+          <div class="prog-text">
+            <span id="prog-cur">Line 0</span>
+            <span id="prog-tot">of 0</span>
+          </div>
+        </div>
+
+        <!-- Music Volume -->
+        <div class="ctrl-section">
+          <div class="ctrl-section-label">Music Volume</div>
+          <div class="vol-row">
+            <span class="vol-icon">🎵</span>
+            <input type="range" class="vol-slider" id="vol-slider"
+              min="0" max="1" step="0.05" value="0.22"
+              oninput="App.setVolume(this.value)" />
+            <span class="vol-icon">🔊</span>
+          </div>
+        </div>
+
+        <!-- Keyboard hint -->
+        <div class="kbd-hint">
+          <kbd>Space</kbd> Play/Pause &nbsp;
+          <kbd>←</kbd><kbd>→</kbd> Skip &nbsp;
+          <kbd>R</kbd> Restart
+        </div>
+
+      </div><!-- end ctrl-box -->
+
+    </aside>
+  </main>
+
+  <script src="js/story.js"></script>
+</body>
+</html>
